@@ -1,0 +1,19 @@
+# Dependencias y builds
+node_modules/
+.next/
+.open-next/
+.wrangler/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Entorno (nunca se versionan los valores reales)
+.env*.local
+.env
+
+# Sistema y editores
+.DS_Store
+.claude/settings.local.json
+
+# Python (generador de datos)
+__pycache__/

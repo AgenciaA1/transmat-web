@@ -1,0 +1,19 @@
+{
+  // Worker de Cloudflare (cuenta de Agencia A1) que sirve el sitio compilado por OpenNext.
+  // URL de previsualización: https://transmat-web.web-6f2.workers.dev
+  // Dominio final (fase 3): transmat.cl, cuando el cliente apunte el DNS a Cloudflare.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "transmat-web",
+  "account_id": "c6f20502c10a8f27595a795796986dc4",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
