@@ -40,9 +40,11 @@ export function candidatos(operacion: TipoOperacion, pesoT: number): Candidato[]
   const necesitaTransporte = operacion === "transporte" || operacion === "combinada";
 
   if (necesitaGrua) {
-    const gruas = FLOTA.filter((e) => e.categoria === "gruas-moviles" && e.capacidadT !== null && e.capacidadT >= pesoT)
-      .sort((a, b) => (a.capacidadT ?? 0) - (b.capacidadT ?? 0))
-      .slice(0, 3);
+    // Margen de criterio: candidatos que trabajen al 80 % o menos de su capacidad nominal.
+    // Si ninguno cumple (cargas cercanas al máximo de la flota), se muestran los que la igualan o superan.
+    const todas = FLOTA.filter((e) => e.categoria === "gruas-moviles" && e.capacidadT !== null).sort((a, b) => (a.capacidadT ?? 0) - (b.capacidadT ?? 0));
+    const conMargen = todas.filter((e) => (e.capacidadT ?? 0) >= pesoT * 1.25);
+    const gruas = (conMargen.length ? conMargen : todas.filter((e) => (e.capacidadT ?? 0) >= pesoT)).slice(0, 3);
     for (const g of gruas) {
       out.push({
         id: g.id,

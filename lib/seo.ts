@@ -23,7 +23,8 @@ export function buildMetadata({
   const url = `${SITE.url}${path === "/" ? "" : path}`;
   const imagen = image.startsWith("http") ? image : `${SITE.url}${image}`;
   return {
-    title,
+    // Título absoluto: cada página escribe el suyo completo y la plantilla del layout no se suma.
+    title: { absolute: title },
     description,
     alternates: { canonical: url },
     robots:
