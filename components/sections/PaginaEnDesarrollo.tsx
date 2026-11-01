@@ -24,7 +24,7 @@ export function PaginaEnDesarrollo({ eyebrow, titulo, descripcion, fase, childre
             <>
               {" "}
               Mientras tanto, el contenido vigente está en{" "}
-              <a href={enlaceActual} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-white">
+              <a href={enlaceActual} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-tm-tinta">
                 transmat.cl
               </a>
               .
@@ -36,7 +36,7 @@ export function PaginaEnDesarrollo({ eyebrow, titulo, descripcion, fase, childre
         <Button href="/planificador" evento="cta_click" eventoParams={{ ubicacion_cta: "pagina_en_desarrollo", destino: "planificador" }}>
           Planificar operación
         </Button>
-        <Link href="/" className="inline-flex items-center px-2 font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave hover:text-white">
+        <Link href="/" className="inline-flex items-center px-2 font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave hover:text-tm-tinta">
           ← Volver al inicio
         </Link>
       </div>
