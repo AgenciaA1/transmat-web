@@ -7,12 +7,14 @@ type Variante = "rojo" | "contorno" | "blanco" | "enlace";
 type Tamano = "md" | "sm" | "lg";
 
 /* Cada variante tiene estado hover y estado pulsado (`active:`), como pide HIG › Buttons. */
+/* Colores por token semántico (cta, tinta, acento): dentro de un BloqueTema rojo o blanco el botón
+   se invierte solo, sin variantes nuevas. En la Home A los tokens valen lo mismo que antes. */
 const variantes: Record<Variante, string> = {
-  rojo: "bg-tm-rojo text-white shadow-[0_10px_28px_rgba(223,8,33,0.28)] hover:bg-tm-rojo-oscuro hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:bg-tm-rojo-oscuro active:shadow-none",
-  contorno: "border border-tm-linea-fuerte text-white hover:border-white hover:bg-white/5 active:scale-[0.98] active:bg-white/10",
+  rojo: "bg-tm-cta text-tm-cta-texto shadow-[0_10px_28px_var(--tm-cta-sombra)] hover:bg-tm-cta-hover hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:bg-tm-cta-hover active:shadow-none",
+  contorno: "border border-tm-linea-fuerte text-tm-tinta hover:border-tm-tinta hover:bg-tm-tinta/5 active:scale-[0.98] active:bg-tm-tinta/10",
   blanco: "bg-white text-tm-negro hover:bg-neutral-200 active:scale-[0.98] active:bg-neutral-300",
   // El enlace lleva subrayado siempre: la interactividad no depende solo del color.
-  enlace: "min-h-11 px-0 py-0 text-[12.5px] text-tm-rojo-texto underline decoration-tm-rojo-texto/40 underline-offset-4 hover:decoration-current active:opacity-70",
+  enlace: "min-h-11 px-0 py-0 text-[12.5px] text-tm-acento-texto underline decoration-tm-acento-texto/40 underline-offset-4 hover:decoration-current active:opacity-70",
 };
 /* Mínimo táctil de 44 px (mínimo HIG en móvil) incluso en el tamaño chico. */
 const tamanos: Record<Tamano, string> = {

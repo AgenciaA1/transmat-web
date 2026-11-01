@@ -19,7 +19,7 @@ export function BandaEmergencias() {
             <IconPhone width={18} height={18} /> {SITE.telefono}
           </Button>
           <Button href={whatsappHref("Hola Transmat, tengo una emergencia y necesito coordinar una maniobra de rescate.")} variante="contorno" tamano="lg" evento="whatsapp_click" eventoParams={{ ubicacion_cta: "banda_emergencias" }}>
-            <IconWhatsApp width={18} height={18} className="text-tm-verde-texto" /> WhatsApp
+            <IconWhatsApp width={18} height={18} className="text-tm-whatsapp" /> WhatsApp
           </Button>
         </div>
       </div>

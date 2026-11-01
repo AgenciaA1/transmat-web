@@ -22,10 +22,10 @@ export function Hero() {
         <div>
           <p className="eyebrow">Izajes y transportes de alta complejidad · La Negra, Antofagasta</p>
           <h1 id="titulo-hero" className="mt-6 text-display">
-            Expertos en cada <span className="text-tm-rojo">movimiento.</span>
+            Expertos en cada <span className="text-tm-acento">movimiento.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lead text-tm-texto">
-            Planificamos y ejecutamos izajes de <strong className="font-medium text-white">35 a 800 toneladas</strong> y transportes de cargas especiales para minería, energía e industria en el norte de Chile.
+            Planificamos y ejecutamos izajes de <strong className="font-medium text-tm-tinta">35 a 800 toneladas</strong> y transportes de cargas especiales para minería, energía e industria en el norte de Chile.
             Cuéntanos qué necesitas mover y te decimos con qué equipos y cómo.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -33,7 +33,7 @@ export function Hero() {
               Planificar mi operación
             </Button>
             <Button href={SITE.telefonoHref} variante="contorno" tamano="lg" evento="phone_click" eventoParams={{ ubicacion_cta: "hero" }}>
-              <IconPhone width={16} height={16} className="shrink-0 text-tm-rojo-texto" />
+              <IconPhone width={16} height={16} className="shrink-0 text-tm-acento-texto" />
               {/* En ancho compacto la etiqueta y el número se apilan a propósito, en vez de cortarse al azar. */}
               <span className="flex flex-col items-start gap-0.5 text-left sm:flex-row sm:items-center sm:gap-2.5">
                 <span>Emergencias 24/7</span>
@@ -48,7 +48,7 @@ export function Hero() {
             {cifras.map((c) => (
               <div key={c!.clave}>
                 <dt className="font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave">{c!.label}</dt>
-                <dd className="mt-1 text-[1.6rem] font-black leading-none text-white" data-tabular>
+                <dd className="mt-1 text-[1.6rem] font-black leading-none text-tm-tinta" data-tabular>
                   {c!.valor}
                 </dd>
               </div>

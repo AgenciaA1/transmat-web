@@ -30,7 +30,7 @@ export function CgoPromesa() {
         <Reveal as="ol" className="panel-hud divide-y divide-tm-linea">
           {ETAPAS.map(([t, d], i) => (
             <li key={t} className="grid grid-cols-[48px_1fr] gap-4 p-5">
-              <span className={`flex h-9 w-9 items-center justify-center rounded-full border font-mono text-small ${i === 3 ? "border-tm-rojo text-tm-rojo-texto shadow-[0_0_0_4px_rgba(223,8,33,.2)]" : "border-tm-linea-fuerte text-tm-texto"}`} data-tabular>
+              <span className={`flex h-9 w-9 items-center justify-center rounded-full border font-mono text-small ${i === 3 ? "border-tm-acento text-tm-acento-texto shadow-[0_0_0_4px_rgba(223,8,33,.2)]" : "border-tm-linea-fuerte text-tm-texto"}`} data-tabular>
                 {i + 1}
               </span>
               <div>

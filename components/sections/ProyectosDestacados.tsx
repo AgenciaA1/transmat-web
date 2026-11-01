@@ -11,7 +11,7 @@ import { formatearFecha } from "@/lib/utils";
 export function ProyectosDestacados() {
   const casos = PROYECTOS.filter((p) => p.destacado).slice(0, 3);
   return (
-    <section className="border-t border-tm-linea bg-tm-gris-900 py-20 md:py-28" aria-labelledby="titulo-proyectos">
+    <section className="border-t border-tm-linea bg-tm-fondo-2 py-20 md:py-28" aria-labelledby="titulo-proyectos">
       <div className="container-tm">
         <Encabezado
           eyebrow="Proyectos"
@@ -28,27 +28,27 @@ export function ProyectosDestacados() {
           {casos.map((p, i) => {
             const ind = industria(p.industria);
             return (
-              <Reveal as="li" key={p.slug} delay={i * 60} className="flex flex-col border border-tm-linea bg-tm-negro">
+              <Reveal as="li" key={p.slug} delay={i * 60} className="flex flex-col border border-tm-linea bg-tm-fondo">
                 <Link href={`/proyectos/${p.slug}`} className="group flex h-full flex-col">
-                  <div className="relative aspect-[16/10] overflow-hidden border-b border-tm-linea bg-tm-negro">
+                  <div className="relative aspect-[16/10] overflow-hidden border-b border-tm-linea bg-tm-fondo">
                     {p.imagen ? (
-                      <Image src={p.imagen} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover opacity-80 transition-transform duration-slow ease-tm group-hover:scale-[1.03]" />
+                      <Image src={p.imagen} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover opacity-(--tm-foto-2) transition-transform duration-slow ease-tm group-hover:scale-[1.03]" />
                     ) : (
                       <div className="rejilla absolute inset-0 opacity-60" />
                     )}
                   </div>
                   <div className="flex flex-1 flex-col p-6">
                     <div className="flex flex-wrap gap-2 font-mono text-overline uppercase tracking-[0.12em]">
-                      {ind && <span className="border border-tm-linea-fuerte px-2 py-0.5 text-white">{ind.corto}</span>}
+                      {ind && <span className="border border-tm-linea-fuerte px-2 py-0.5 text-tm-tinta">{ind.corto}</span>}
                       <time dateTime={p.fecha} className="border border-tm-linea-fuerte px-2 py-0.5 text-tm-texto-suave">
                         {formatearFecha(p.fecha)}
                       </time>
                     </div>
-                    <h3 className="mt-4 text-h4 transition-colors duration-fast group-hover:text-tm-rojo-texto group-active:text-tm-rojo-texto">{p.titulo}</h3>
+                    <h3 className="mt-4 text-h4 transition-colors duration-fast group-hover:text-tm-acento-texto group-active:text-tm-acento-texto">{p.titulo}</h3>
                     <p className="mt-3 text-small text-tm-texto">{p.resumen}</p>
                     {p.equipos.length > 0 && (
                       <p className="mt-4 font-mono text-overline uppercase tracking-[0.12em] text-tm-texto-suave">
-                        Equipos · <span className="text-white">{p.equipos.join(" · ")}</span>
+                        Equipos · <span className="text-tm-tinta">{p.equipos.join(" · ")}</span>
                       </p>
                     )}
                     {p.cliente && <p className="mt-1 font-mono text-overline uppercase tracking-[0.12em] text-tm-texto-suave">Cliente · {p.cliente}</p>}

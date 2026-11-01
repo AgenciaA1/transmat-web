@@ -8,18 +8,18 @@ import { SITE } from "@/lib/constants";
 
 export function Servicios() {
   return (
-    <section className="border-t border-tm-linea bg-tm-gris-900 py-20 md:py-28" aria-labelledby="titulo-servicios">
+    <section className="border-t border-tm-linea bg-tm-fondo-2 py-20 md:py-28" aria-labelledby="titulo-servicios">
       <div className="container-tm">
         <Encabezado eyebrow="Servicios" id="titulo-servicios" titulo="Transporte, izaje, ingeniería y logística en un solo proveedor" lead="Cuatro servicios que hoy operan y uno que proponemos sumar. Todos terminan en una solicitud concreta, no en un formulario genérico." />
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
           {SERVICIOS.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 50} className="flex flex-col border border-tm-linea bg-tm-negro p-6 md:p-8">
+            <Reveal key={s.slug} delay={i * 50} className="flex flex-col border border-tm-linea bg-tm-fondo p-6 md:p-8">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="font-mono text-overline uppercase tracking-[0.14em] text-tm-rojo-texto">{s.marca}</span>
+                <span className="font-mono text-overline uppercase tracking-[0.14em] text-tm-acento-texto">{s.marca}</span>
                 {s.nuevo && <span className="rounded-sm border border-tm-ambar/60 px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-tm-ambar">Propuesta · a validar</span>}
               </div>
               <h3 className="mt-3 text-h3">
-                <Link href={s.ruta} className="-my-1 inline-block py-1 transition-colors duration-fast hover:text-tm-rojo-texto active:text-tm-rojo-texto">
+                <Link href={s.ruta} className="-my-1 inline-block py-1 transition-colors duration-fast hover:text-tm-acento-texto active:text-tm-acento-texto">
                   {s.nombre}
                 </Link>
               </h3>

@@ -27,6 +27,19 @@
   --color-tm-azul-texto: #7aa2e8;
   --color-tm-ambar: #ffd27a;
 
+  /* --- Tokens semánticos por bloque. En la Home A valen lo mismo que la paleta negra;
+         .tema-rojo y .tema-blanco (más abajo) los redefinen para la variante B. --- */
+  --color-tm-fondo: #0a0a0a;
+  --color-tm-fondo-2: #111113;
+  --color-tm-fondo-3: #18181b;
+  --color-tm-tinta: #ffffff;
+  --color-tm-acento: #df0821;
+  --color-tm-acento-texto: #ff5a6b;
+  --color-tm-cta: #df0821;
+  --color-tm-cta-hover: #b50619;
+  --color-tm-cta-texto: #ffffff;
+  --color-tm-whatsapp: #62c46d;
+
   /* --- Tipografía --- */
   --font-sans: var(--font-tm-sans), Roboto, Arial, Helvetica, sans-serif;
   --font-mono: var(--font-tm-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -82,6 +95,12 @@
     --header-height: 68px;
     --barra-movil: 64px;
     color-scheme: dark;
+    /* Variables de bloque que no son colores de utilidad */
+    --tm-hud: var(--color-tm-rojo);
+    --tm-foto: 0.7;
+    --tm-foto-2: 0.8;
+    --tm-range-borde: #ffffff;
+    --tm-cta-sombra: rgba(223, 8, 33, 0.28);
   }
   /* En escritorio el header crece para dar aire al logo (40 px) y al menú. */
   @media (width >= 80rem) {
@@ -115,7 +134,7 @@
   h2,
   h3,
   h4 {
-    color: var(--color-tm-blanco);
+    color: var(--color-tm-tinta);
     font-weight: 900;
     text-transform: uppercase;
     text-wrap: balance;
@@ -144,11 +163,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Foco visible siempre: anillo blanco con halo oscuro, legible sobre negro, rojo y foto. */
+  /* Foco visible siempre: anillo del color de la tinta con halo del color del fondo, legible en
+     cualquier bloque (negro, rojo o blanco) y sobre foto. */
   :focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--color-tm-tinta);
     outline-offset: 3px;
-    box-shadow: 0 0 0 5px rgba(10, 10, 10, 0.9);
+    box-shadow: 0 0 0 5px var(--color-tm-fondo);
     border-radius: 2px;
   }
 
@@ -217,28 +237,28 @@
   font-size: var(--text-overline);
   letter-spacing: var(--text-overline--letter-spacing);
   text-transform: uppercase;
-  color: var(--color-tm-rojo-texto);
+  color: var(--color-tm-acento-texto);
   &::before {
     content: "";
     width: 28px;
     height: 2px;
-    background: var(--color-tm-rojo);
+    background: var(--color-tm-acento);
     flex: none;
   }
 }
 
-/* Panel con esquinas HUD en rojo */
+/* Panel con esquinas HUD (rojas en la Home A; blancas sobre rojo en la variante B) */
 @utility panel-hud {
   position: relative;
   border: 1px solid var(--color-tm-linea);
-  background: var(--color-tm-gris-900);
+  background: var(--color-tm-fondo-2);
   &::before,
   &::after {
     content: "";
     position: absolute;
     width: 14px;
     height: 14px;
-    border: 2px solid var(--color-tm-rojo);
+    border: 2px solid var(--tm-hud);
     pointer-events: none;
   }
   &::before {
@@ -349,8 +369,8 @@ input[type="range"].tm-range::-webkit-slider-thumb {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--color-tm-rojo);
-  border: 3px solid #fff;
+  background: var(--color-tm-acento);
+  border: 3px solid var(--tm-range-borde);
   margin-top: -12.5px;
   cursor: pointer;
   transition: transform var(--duration-instant) var(--ease-tm);
@@ -362,7 +382,64 @@ input[type="range"].tm-range::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--color-tm-rojo);
-  border: 3px solid #fff;
+  background: var(--color-tm-acento);
+  border: 3px solid var(--tm-range-borde);
   cursor: pointer;
+}
+
+/* ============================================================
+   Temas por bloque (variante B de look): los mismos componentes
+   con otro juego de tokens. Contrastes calculados en docs/HOME_B_LOOK.md.
+   ============================================================ */
+.tema-rojo {
+  color-scheme: dark;
+  --color-tm-fondo: #df0821;
+  --color-tm-fondo-2: #c70720;
+  --color-tm-fondo-3: #b50619;
+  --color-tm-tinta: #ffffff;
+  /* Sobre el rojo de marca solo el blanco puro llega a 5:1; la jerarquía va por peso y tamaño. */
+  --color-tm-texto: #ffffff;
+  --color-tm-texto-suave: rgba(255, 255, 255, 0.96);
+  --color-tm-linea: rgba(255, 255, 255, 0.35);
+  --color-tm-linea-fuerte: rgba(255, 255, 255, 0.85);
+  --color-tm-acento: #ffffff;
+  --color-tm-acento-texto: #ffffff;
+  --color-tm-cta: #ffffff;
+  --color-tm-cta-hover: #ffe4e7;
+  --color-tm-cta-texto: #df0821;
+  --color-tm-whatsapp: #ffffff;
+  --color-tm-ambar: #ffffff;
+  --tm-hud: #ffffff;
+  --tm-foto: 1;
+  --tm-foto-2: 1;
+  --tm-range-borde: #df0821;
+  --tm-cta-sombra: rgba(10, 10, 10, 0.22);
+}
+.tema-rojo ::selection {
+  background: #ffffff;
+  color: #df0821;
+}
+.tema-blanco {
+  color-scheme: light;
+  --color-tm-fondo: #ffffff;
+  --color-tm-fondo-2: #f4f4f5;
+  --color-tm-fondo-3: #e8e8eb;
+  --color-tm-tinta: #0a0a0a;
+  --color-tm-texto: rgba(10, 10, 10, 0.84);
+  --color-tm-texto-suave: rgba(10, 10, 10, 0.62);
+  --color-tm-linea: rgba(10, 10, 10, 0.14);
+  --color-tm-linea-fuerte: rgba(10, 10, 10, 0.45);
+  /* El rojo de marca puro da 5:1 sobre blanco: aquí sí se usa tal cual para texto. */
+  --color-tm-acento: #df0821;
+  --color-tm-acento-texto: #df0821;
+  --color-tm-cta: #df0821;
+  --color-tm-cta-hover: #b50619;
+  --color-tm-cta-texto: #ffffff;
+  --color-tm-whatsapp: #2f8a37;
+  --color-tm-ambar: #8a5a00;
+  --tm-hud: #df0821;
+  --tm-foto: 1;
+  --tm-foto-2: 1;
+  --tm-range-borde: #ffffff;
+  --tm-cta-sombra: rgba(223, 8, 33, 0.22);
 }

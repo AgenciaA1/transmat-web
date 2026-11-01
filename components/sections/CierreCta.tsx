@@ -19,7 +19,7 @@ export function CierreCta() {
               Planificar mi operación
             </Button>
             <Button href={whatsappHref("Hola Transmat, quiero consultar por una operación.")} variante="contorno" tamano="lg" evento="whatsapp_click" eventoParams={{ ubicacion_cta: "cierre" }}>
-              <IconWhatsApp width={18} height={18} className="text-tm-verde-texto" /> Escribir por WhatsApp
+              <IconWhatsApp width={18} height={18} className="text-tm-whatsapp" /> Escribir por WhatsApp
             </Button>
             <p className="mt-2 text-center font-mono text-small text-tm-texto-suave">
               {SITE.email} · {SITE.telefono}

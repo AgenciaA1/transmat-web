@@ -41,11 +41,11 @@ export function FlotaRangos() {
         />
         <ul className="mt-12 grid gap-px border border-tm-linea bg-tm-linea sm:grid-cols-2 lg:grid-cols-5">
           {resumen.map((r, i) => (
-            <Reveal as="li" key={r.categoria} delay={i * 50} className="bg-tm-negro">
-              <Link href={`/flota/${r.categoria}`} className="block h-full p-6 transition-colors duration-fast hover:bg-tm-gris-900 active:bg-tm-gris-800">
+            <Reveal as="li" key={r.categoria} delay={i * 50} className="bg-tm-fondo">
+              <Link href={`/flota/${r.categoria}`} className="block h-full p-6 transition-colors duration-fast hover:bg-tm-fondo-2 active:bg-tm-fondo-3">
                 <p className="font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave">{DETALLE[r.categoria]}</p>
                 <h3 className="mt-2 text-h4">{NOMBRES[r.categoria]}</h3>
-                <p className="mt-5 text-[2rem] font-black leading-none text-white" data-tabular>
+                <p className="mt-5 text-[2rem] font-black leading-none text-tm-tinta" data-tabular>
                   {r.cantidad}
                   <span className="ml-1 text-small font-normal text-tm-texto-suave">{r.cantidad === 1 ? "equipo" : "equipos"}</span>
                 </p>
@@ -61,7 +61,7 @@ export function FlotaRangos() {
           <table className="w-full min-w-[640px] text-left text-small">
             <caption className="sr-only">Grúas destacadas de la flota</caption>
             <thead>
-              <tr className="bg-tm-gris-900 font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave">
+              <tr className="bg-tm-fondo-2 font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave">
                 <th className="px-5 py-3 font-medium">Grúa destacada</th>
                 <th className="px-5 py-3 font-medium">Capacidad</th>
                 <th className="px-5 py-3 font-medium">Pluma</th>
@@ -71,12 +71,12 @@ export function FlotaRangos() {
             <tbody className="divide-y divide-tm-linea">
               {destacadas.map((e) => (
                 <tr key={e.id}>
-                  <td className="px-5 py-3 font-black uppercase text-white">
-                    <Link href={`/flota/${e.categoria}/${e.id}`} className="-my-3 block py-3 transition-colors duration-fast hover:text-tm-rojo-texto active:text-tm-rojo-texto">
+                  <td className="px-5 py-3 font-black uppercase text-tm-tinta">
+                    <Link href={`/flota/${e.categoria}/${e.id}`} className="-my-3 block py-3 transition-colors duration-fast hover:text-tm-acento-texto active:text-tm-acento-texto">
                       {e.marca} {e.modelo}
                     </Link>
                   </td>
-                  <td className="px-5 py-3 font-mono text-white" data-tabular>
+                  <td className="px-5 py-3 font-mono text-tm-tinta" data-tabular>
                     {e.capacidadT ? formatearToneladas(e.capacidadT) : "—"}
                   </td>
                   <td className="px-5 py-3 font-mono" data-tabular>
