@@ -28,7 +28,7 @@ export function ProyectosDestacados() {
           {casos.map((p, i) => {
             const ind = industria(p.industria);
             return (
-              <Reveal as="li" key={p.slug} delay={i * 60} className="panel-hud flex flex-col">
+              <Reveal as="li" key={p.slug} delay={i * 60} className="flex flex-col border border-tm-linea bg-tm-negro">
                 <Link href={`/proyectos/${p.slug}`} className="group flex h-full flex-col">
                   <div className="relative aspect-[16/10] overflow-hidden border-b border-tm-linea bg-tm-negro">
                     {p.imagen ? (
@@ -38,13 +38,13 @@ export function ProyectosDestacados() {
                     )}
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <div className="flex flex-wrap gap-2 font-mono text-[10.5px] uppercase tracking-[0.12em]">
-                      {ind && <span className="border border-tm-rojo px-2 py-0.5 text-tm-rojo-texto">{ind.corto}</span>}
+                    <div className="flex flex-wrap gap-2 font-mono text-overline uppercase tracking-[0.12em]">
+                      {ind && <span className="border border-tm-linea-fuerte px-2 py-0.5 text-white">{ind.corto}</span>}
                       <time dateTime={p.fecha} className="border border-tm-linea-fuerte px-2 py-0.5 text-tm-texto-suave">
                         {formatearFecha(p.fecha)}
                       </time>
                     </div>
-                    <h3 className="mt-4 text-h4 group-hover:text-tm-rojo-texto">{p.titulo}</h3>
+                    <h3 className="mt-4 text-h4 transition-colors duration-fast group-hover:text-tm-rojo-texto group-active:text-tm-rojo-texto">{p.titulo}</h3>
                     <p className="mt-3 text-small text-tm-texto">{p.resumen}</p>
                     {p.equipos.length > 0 && (
                       <p className="mt-4 font-mono text-overline uppercase tracking-[0.12em] text-tm-texto-suave">

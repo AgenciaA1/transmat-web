@@ -17,8 +17,15 @@ export function TrackClicks() {
       }
       track(el.dataset.ev as EventoMedicion, params);
     };
+    // iOS Safari solo aplica :active cuando el documento escucha touchstart: así el estado pulsado
+    // de botones y enlaces aparece al apretar, no al soltar.
+    const noop = () => {};
     document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    document.addEventListener("touchstart", noop, { passive: true });
+    return () => {
+      document.removeEventListener("click", onClick);
+      document.removeEventListener("touchstart", noop);
+    };
   }, []);
   return null;
 }

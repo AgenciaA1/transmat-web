@@ -1,6 +1,7 @@
 import { Encabezado } from "./Encabezado";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { IconArrow } from "@/components/ui/Icons";
 
 /** CGO como promesa de trazabilidad, no como lista de funciones (auditoría H-003). */
 const ETAPAS = [
@@ -17,12 +18,12 @@ export function CgoPromesa() {
       <div className="container-tm grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
         <div>
           <Encabezado eyebrow="CGO Transmat" id="titulo-cgo" titulo="Tu operación, visible en línea" lead="El Centro de Gestión Operacional ya controla cada orden de trabajo en terreno. En el sitio nuevo, el cliente ve su proyecto en las mismas etapas." />
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <Button href="/cgo" variante="contorno">
               Conocer el CGO
             </Button>
-            <Button href="/planificador" evento="cta_click" eventoParams={{ ubicacion_cta: "cgo", destino: "planificador" }}>
-              Planificar con trazabilidad
+            <Button href="/planificador" variante="enlace" evento="cta_click" eventoParams={{ ubicacion_cta: "cgo", destino: "planificador" }}>
+              Planificar con trazabilidad <IconArrow width={14} height={14} />
             </Button>
           </div>
         </div>

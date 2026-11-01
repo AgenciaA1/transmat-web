@@ -23,24 +23,32 @@ export function MobileMenu() {
 
   return (
     <div className="xl:hidden">
-      <button type="button" aria-expanded={abierto} aria-controls="menu-movil" onClick={() => setAbierto(!abierto)} className="inline-flex h-11 w-11 items-center justify-center border border-tm-linea-fuerte text-white">
+      <button type="button" aria-expanded={abierto} aria-controls="menu-movil" onClick={() => setAbierto(!abierto)} className="inline-flex h-11 w-11 items-center justify-center border border-tm-linea-fuerte text-white transition-colors duration-fast active:bg-white/10">
         {abierto ? <IconClose /> : <IconMenu />}
         <span className="sr-only">{abierto ? "Cerrar menú" : "Abrir menú"}</span>
       </button>
 
-      <div id="menu-movil" hidden={!abierto} className="fixed inset-x-0 top-(--header-height) bottom-0 z-40 overflow-y-auto bg-tm-negro">
-        <nav aria-label="Principal, móvil" className="container-tm py-6">
+      {/* Posicionado respecto del header (que es fijo): el backdrop-filter del header lo convierte
+          en contenedor de cualquier descendiente `fixed`, por eso el panel no puede ser `fixed`. */}
+      {/* Entra y sale por el mismo camino (desde el header hacia abajo), con curva de resorte;
+          la transición de `display` es discreta, así que `hidden` sigue sacándolo del árbol accesible. */}
+      <div
+        id="menu-movil"
+        hidden={!abierto}
+        className="absolute inset-x-0 top-full h-[calc(100dvh-var(--header-height))] overflow-y-auto bg-tm-negro transition-[opacity,translate,display] transition-discrete duration-base ease-spring starting:-translate-y-2 starting:opacity-0 [&[hidden]]:-translate-y-2 [&[hidden]]:opacity-0"
+      >
+        <nav aria-label="Principal, móvil" className="container-tm py-6 pb-10">
           <ul className="divide-y divide-tm-linea border-y border-tm-linea">
             {NAV.map((g) => (
               <li key={g.href} className="py-3">
-                <Link href={g.href} className="block py-2 text-h4 font-black uppercase text-white">
+                <Link href={g.href} className="block py-2.5 text-h4 font-black uppercase text-white active:text-tm-rojo-texto">
                   {g.label}
                 </Link>
                 {g.items && (
-                  <ul className="mt-1 grid gap-1 pb-2">
+                  <ul className="mt-1 grid pb-2">
                     {g.items.map((it) => (
                       <li key={it.href}>
-                        <Link href={it.href} className="block py-1.5 text-small text-tm-texto">
+                        <Link href={it.href} className="block py-2.5 text-small text-tm-texto active:text-white">
                           {it.label}
                         </Link>
                       </li>

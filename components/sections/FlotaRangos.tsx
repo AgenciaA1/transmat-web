@@ -42,14 +42,14 @@ export function FlotaRangos() {
         <ul className="mt-12 grid gap-px border border-tm-linea bg-tm-linea sm:grid-cols-2 lg:grid-cols-5">
           {resumen.map((r, i) => (
             <Reveal as="li" key={r.categoria} delay={i * 50} className="bg-tm-negro">
-              <Link href={`/flota/${r.categoria}`} className="block h-full p-6 transition-colors duration-fast hover:bg-tm-gris-900">
+              <Link href={`/flota/${r.categoria}`} className="block h-full p-6 transition-colors duration-fast hover:bg-tm-gris-900 active:bg-tm-gris-800">
                 <p className="font-mono text-overline uppercase tracking-[0.14em] text-tm-texto-suave">{DETALLE[r.categoria]}</p>
                 <h3 className="mt-2 text-h4">{NOMBRES[r.categoria]}</h3>
                 <p className="mt-5 text-[2rem] font-black leading-none text-white" data-tabular>
                   {r.cantidad}
                   <span className="ml-1 text-small font-normal text-tm-texto-suave">{r.cantidad === 1 ? "equipo" : "equipos"}</span>
                 </p>
-                <p className="mt-2 font-mono text-small text-tm-rojo-texto" data-tabular>
+                <p className="mt-2 font-mono text-small text-tm-texto" data-tabular>
                   {r.rango ? (r.rango.min === r.rango.max ? formatearToneladas(r.rango.max) : `${formatearToneladas(r.rango.min)} a ${formatearToneladas(r.rango.max)}`) : "Capacidad según configuración"}
                 </p>
               </Link>
@@ -72,7 +72,7 @@ export function FlotaRangos() {
               {destacadas.map((e) => (
                 <tr key={e.id}>
                   <td className="px-5 py-3 font-black uppercase text-white">
-                    <Link href={`/flota/${e.categoria}/${e.id}`} className="hover:text-tm-rojo-texto">
+                    <Link href={`/flota/${e.categoria}/${e.id}`} className="-my-3 block py-3 transition-colors duration-fast hover:text-tm-rojo-texto active:text-tm-rojo-texto">
                       {e.marca} {e.modelo}
                     </Link>
                   </td>

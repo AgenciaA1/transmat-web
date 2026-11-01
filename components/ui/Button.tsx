@@ -6,16 +6,19 @@ import type { EventoMedicion } from "@/lib/analytics";
 type Variante = "rojo" | "contorno" | "blanco" | "enlace";
 type Tamano = "md" | "sm" | "lg";
 
+/* Cada variante tiene estado hover y estado pulsado (`active:`), como pide HIG › Buttons. */
 const variantes: Record<Variante, string> = {
-  rojo: "bg-tm-rojo text-white shadow-[0_10px_28px_rgba(223,8,33,0.28)] hover:bg-tm-rojo-oscuro hover:-translate-y-0.5",
-  contorno: "border border-tm-linea-fuerte text-white hover:border-white hover:bg-white/5",
-  blanco: "bg-white text-tm-negro hover:bg-neutral-200",
-  enlace: "text-tm-rojo-texto underline-offset-4 hover:underline px-0 py-0",
+  rojo: "bg-tm-rojo text-white shadow-[0_10px_28px_rgba(223,8,33,0.28)] hover:bg-tm-rojo-oscuro hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:bg-tm-rojo-oscuro active:shadow-none",
+  contorno: "border border-tm-linea-fuerte text-white hover:border-white hover:bg-white/5 active:scale-[0.98] active:bg-white/10",
+  blanco: "bg-white text-tm-negro hover:bg-neutral-200 active:scale-[0.98] active:bg-neutral-300",
+  // El enlace lleva subrayado siempre: la interactividad no depende solo del color.
+  enlace: "min-h-11 px-0 py-0 text-[12.5px] text-tm-rojo-texto underline decoration-tm-rojo-texto/40 underline-offset-4 hover:decoration-current active:opacity-70",
 };
+/* Mínimo táctil de 44 px (mínimo HIG en móvil) incluso en el tamaño chico. */
 const tamanos: Record<Tamano, string> = {
-  sm: "px-4 py-2.5 text-[11.5px]",
-  md: "px-6 py-3.5 text-[12.5px]",
-  lg: "px-8 py-4 text-[13px]",
+  sm: "min-h-11 px-4 py-2.5 text-[12px]",
+  md: "min-h-12 px-6 py-3.5 text-[12.5px]",
+  lg: "min-h-13 px-8 py-4 text-[13px]",
 };
 
 type Props = {
@@ -32,7 +35,8 @@ type Props = {
 
 export function Button({ href, variante = "rojo", tamano = "md", className, children, evento, eventoParams, externo, ...rest }: Props) {
   const clases = cn(
-    "inline-flex items-center justify-center gap-2.5 rounded-sm font-black uppercase tracking-[0.12em] transition-[transform,background-color,border-color,color,box-shadow] duration-fast ease-tm",
+    // Tailwind v4 mueve con `translate` y `scale` (no `transform`): deben estar en la lista o el hover salta sin transición.
+    "inline-flex items-center justify-center gap-2.5 rounded-sm font-black uppercase tracking-[0.12em] transition-[translate,scale,background-color,border-color,color,box-shadow,opacity,text-decoration-color] duration-fast ease-tm",
     "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0",
     variantes[variante],
     variante !== "enlace" && tamanos[tamano],

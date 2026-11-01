@@ -66,6 +66,9 @@
   --duration-slower: 900ms;
   --ease-tm: cubic-bezier(0.2, 0.7, 0.2, 1);
   --ease-precise: cubic-bezier(0.33, 1, 0.68, 1);
+  /* Resorte críticamente amortiguado (damping 1.0) muestreado como linear(): sin rebote, asienta
+     al final de la duración declarada. Para paneles y menús que aparecen por un toque. */
+  --ease-spring: linear(0, 0.0798, 0.2385, 0.4064, 0.5548, 0.6749, 0.7672, 0.8358, 0.8856, 0.9211, 0.946, 0.9633, 0.9752, 0.9833, 0.9888, 0.9925, 0.995, 0.9967, 0.9978, 0.9986, 1);
 
   --spacing-container: 1280px;
 }
@@ -79,6 +82,12 @@
     --header-height: 68px;
     --barra-movil: 64px;
     color-scheme: dark;
+  }
+  /* En escritorio el header crece para dar aire al logo (40 px) y al menú. */
+  @media (width >= 80rem) {
+    :root {
+      --header-height: 84px;
+    }
   }
 
   * {
@@ -127,6 +136,14 @@
     color: #fff;
   }
 
+  /* El estado pulsado lo dibuja cada control (active:); el destello gris del sistema sobra. */
+  a,
+  button,
+  [role="radio"],
+  input[type="range"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   /* Foco visible siempre: anillo blanco con halo oscuro, legible sobre negro, rojo y foto. */
   :focus-visible {
     outline: 2px solid #fff;
@@ -152,6 +169,30 @@
 /* ============================================================
    Utilidades propias
    ============================================================ */
+
+/* Tailwind v4 no genera `duration-*` a partir del tema: sin estas utilidades, duration-fast y
+   duration-slow no existían y toda transición caía a los 150 ms por defecto. */
+@utility duration-instant {
+  transition-duration: var(--duration-instant);
+}
+@utility duration-fast {
+  transition-duration: var(--duration-fast);
+}
+@utility duration-base {
+  transition-duration: var(--duration-base);
+}
+@utility duration-slow {
+  transition-duration: var(--duration-slow);
+}
+@utility duration-slower {
+  transition-duration: var(--duration-slower);
+}
+
+/* Respuesta al apretar: el estado pulsado entra en 100 ms; la vuelta usa la duración normal del
+   elemento (rápido al entrar, suave al salir). Fuera de capas para ganar a las utilidades. */
+:where(a, button, [role="radio"]):active {
+  transition-duration: var(--duration-instant);
+}
 
 @utility container-tm {
   width: 100%;
@@ -221,18 +262,41 @@
   background-size: 64px 64px;
 }
 
-/* Reveal: visible en reposo; .pre solo se aplica por JS a lo que está bajo el primer viewport */
+/* Reveal. Visible en reposo: Reveal.tsx no aplica nada sobre el primer viewport ni con
+   prefers-reduced-motion. Con soporte de animaciones ligadas al scroll (.scroll) la entrada sigue
+   el gesto 1:1: reversible, interrumpible y a la velocidad del dedo. Sin soporte (.pre/.in) cae a
+   una transición corta con curva de resorte disparada por IntersectionObserver. */
 @utility reveal {
   transition:
-    opacity var(--duration-slow) var(--ease-tm),
-    transform var(--duration-slow) var(--ease-tm);
+    opacity var(--duration-base) var(--ease-spring),
+    translate var(--duration-base) var(--ease-spring);
   &.pre {
     opacity: 0;
-    transform: translateY(24px);
+    translate: 0 20px;
   }
   &.in {
     opacity: 1;
-    transform: none;
+    translate: 0 0;
+  }
+  &.scroll {
+    animation: tm-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry calc(5% + var(--reveal-stagger, 0%)) entry calc(45% + var(--reveal-stagger, 0%));
+  }
+}
+@keyframes tm-reveal {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.scroll {
+    animation: none;
   }
 }
 
@@ -256,18 +320,21 @@
   transform-origin: 400px 400px;
   animation: tm-sweep 26s linear infinite;
 }
+/* 9 s por ciclo (0,11 Hz): fuera de la banda de ~0,2 Hz que molesta a personas con sensibilidad
+   vestibular; con prefers-reduced-motion la regla global lo detiene. */
 .r-pulse {
   transform-origin: 400px 400px;
-  animation: tm-pulse 4.5s ease-out infinite;
+  animation: tm-pulse 9s ease-out infinite;
 }
 
-/* Control deslizante del planificador */
+/* Control deslizante del planificador: 44 px de alto y pulgar de 28 px (mínimos táctiles). */
 input[type="range"].tm-range {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 24px;
+  height: 44px;
   background: transparent;
+  cursor: pointer;
 }
 input[type="range"].tm-range::-webkit-slider-runnable-track {
   height: 3px;
@@ -279,19 +346,23 @@ input[type="range"].tm-range::-moz-range-track {
 }
 input[type="range"].tm-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--color-tm-rojo);
-  border: 2px solid #fff;
-  margin-top: -9px;
+  border: 3px solid #fff;
+  margin-top: -12.5px;
   cursor: pointer;
+  transition: transform var(--duration-instant) var(--ease-tm);
+}
+input[type="range"].tm-range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
 }
 input[type="range"].tm-range::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--color-tm-rojo);
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   cursor: pointer;
 }

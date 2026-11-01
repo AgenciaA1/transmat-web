@@ -33,7 +33,15 @@ export function Hero() {
               Planificar mi operación
             </Button>
             <Button href={SITE.telefonoHref} variante="contorno" tamano="lg" evento="phone_click" eventoParams={{ ubicacion_cta: "hero" }}>
-              <IconPhone width={16} height={16} className="text-tm-rojo-texto" /> Emergencias 24/7 · {SITE.telefono}
+              <IconPhone width={16} height={16} className="shrink-0 text-tm-rojo-texto" />
+              {/* En ancho compacto la etiqueta y el número se apilan a propósito, en vez de cortarse al azar. */}
+              <span className="flex flex-col items-start gap-0.5 text-left sm:flex-row sm:items-center sm:gap-2.5">
+                <span>Emergencias 24/7</span>
+                <span aria-hidden className="hidden sm:inline">
+                  ·
+                </span>
+                <span>{SITE.telefono}</span>
+              </span>
             </Button>
           </div>
           <dl className="mt-12 grid max-w-xl grid-cols-2 gap-x-6 gap-y-5 border-t border-tm-linea pt-6 sm:grid-cols-4">
