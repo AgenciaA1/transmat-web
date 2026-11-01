@@ -60,7 +60,12 @@ export function MobileMenu() {
           </ul>
           <div className="mt-6 grid gap-3">
             <a href={SITE.telefonoHref} data-ev="phone_click" data-ev-params='{"ubicacion_cta":"menu_movil"}' className="inline-flex items-center gap-3 border border-tm-linea-fuerte px-4 py-3 font-mono text-small text-white">
-              <IconPhone className="text-tm-rojo-texto" /> Emergencias 24/7 · {SITE.telefono}
+              <IconPhone className="shrink-0 text-tm-rojo-texto" />
+              {/* Etiqueta y número apilados a propósito: en 375 px no caben en una línea sin partir el número. */}
+              <span className="flex flex-col gap-0.5">
+                <span className="font-bold text-tm-rojo-texto">Emergencias 24/7</span>
+                <span>{SITE.telefono}</span>
+              </span>
             </a>
             <a href={whatsappHref("Hola Transmat, quiero consultar por una operación.")} target="_blank" rel="noopener" data-ev="whatsapp_click" data-ev-params='{"ubicacion_cta":"menu_movil"}' className="inline-flex items-center gap-3 border border-tm-linea-fuerte px-4 py-3 font-mono text-small text-white">
               <IconWhatsApp className="text-tm-verde-texto" /> WhatsApp · {SITE.whatsapp}

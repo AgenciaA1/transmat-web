@@ -51,7 +51,7 @@ export function Header() {
             <IconPhone width={16} height={16} className="text-tm-rojo-texto" />
             <span>
               {/* Entre xl y 2xl el menú ocupa el ancho: queda solo el número, que es lo que se marca. */}
-              <span className="text-tm-texto-suave xl:hidden 2xl:inline">Emergencias 24/7 · </span>
+              <span className="font-bold text-tm-rojo-texto xl:hidden 2xl:inline">Emergencias 24/7 · </span>
               {SITE.telefono}
             </span>
           </a>
