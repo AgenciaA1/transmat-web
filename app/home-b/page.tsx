@@ -30,7 +30,11 @@ export default function HomeB() {
       <p className="border-b border-tm-linea bg-tm-gris-900 px-5 py-2.5 text-center font-mono text-[11.5px] uppercase tracking-[0.12em] text-tm-texto-suave">
         Propuesta de look B · bloques rojo y blanco · mismo contenido que la A ·{" "}
         <Link href="/" className="text-white underline underline-offset-4 hover:text-tm-rojo-texto">
-          Ver versión A
+          Ver A
+        </Link>{" "}
+        ·{" "}
+        <Link href="/home-c" className="text-white underline underline-offset-4 hover:text-tm-rojo-texto">
+          Ver C
         </Link>
       </p>
       <Hero />
